@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>String Operations API</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .endpoint {
+                margin-bottom: 20px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .response {
+                margin-top: 10px;
+                padding: 10px;
+                background-color: #f5f5f5;
+                border-radius: 3px;
+                white-space: pre-wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>String Operations API</h1>
+
+        <div class="endpoint">
+            <h2>Version</h2>
+            <button onclick="getVersion()">Get Version</button>
+            <div id="versionResponse" class="response"></div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Heartbeat</h2>
+            <input type="text" id="heartbeatInput" placeholder="Enter text" />
+            <button onclick="sendHeartbeat()">Send</button>
+            <div id="heartbeatResponse" class="response"></div>
+        </div>
+
+        <div class="endpoint">
+            <h2>To Upper</h2>
+            <input type="text" id="upperInput" placeholder="Enter text" />
+            <button onclick="convertToUpper()">Convert</button>
+            <div id="upperResponse" class="response"></div>
+        </div>
+
+        <div class="endpoint">
+            <h2>To Lower</h2>
+            <input type="text" id="lowerInput" placeholder="Enter text" />
+            <button onclick="convertToLower()">Convert</button>
+            <div id="lowerResponse" class="response"></div>
+        </div>
+
+        <script>
+            async function getVersion() {
+                try {
+                    const response = await fetch("/version");
+                    const data = await response.json();
+                    document.getElementById("versionResponse").textContent =
+                        JSON.stringify(data, null, 2);
+                } catch (error) {
+                    document.getElementById("versionResponse").textContent =
+                        "Error: " + error;
+                }
+            }
+
+            async function sendHeartbeat() {
+                try {
+                    const text =
+                        document.getElementById("heartbeatInput").value;
+                    const response = await fetch("/heartbeat", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ text: text }),
+                    });
+                    const data = await response.json();
+                    document.getElementById("heartbeatResponse").textContent =
+                        JSON.stringify(data, null, 2);
+                } catch (error) {
+                    document.getElementById("heartbeatResponse").textContent =
+                        "Error: " + error;
+                }
+            }
+
+            async function convertToUpper() {
+                try {
+                    const text = document.getElementById("upperInput").value;
+                    const response = await fetch("/to-upper", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ text: text }),
+                    });
+                    const data = await response.json();
+                    document.getElementById("upperResponse").textContent =
+                        JSON.stringify(data, null, 2);
+                } catch (error) {
+                    document.getElementById("upperResponse").textContent =
+                        "Error: " + error;
+                }
+            }
+
+            async function convertToLower() {
+                try {
+                    const text = document.getElementById("lowerInput").value;
+                    const response = await fetch("/to-lower", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ text: text }),
+                    });
+                    const data = await response.json();
+                    document.getElementById("lowerResponse").textContent =
+                        JSON.stringify(data, null, 2);
+                } catch (error) {
+                    document.getElementById("lowerResponse").textContent =
+                        "Error: " + error;
+                }
+            }
+        </script>
+    </body>
+</html>

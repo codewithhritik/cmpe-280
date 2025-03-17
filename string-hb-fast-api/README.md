@@ -74,6 +74,9 @@ Visit `http://localhost:8000` to access the web interface where you can:
 -   **Input:** JSON with "text" field
 -   **Output:** Lowercase version of input string
 
+![image](https://github.com/user-attachments/assets/363d4a9c-21d9-475c-9c11-446c3e9f30b3)
+
+
 ## API Usage Examples
 
 Using curl:

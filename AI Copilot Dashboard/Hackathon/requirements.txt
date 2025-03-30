@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-langchain
-openai     # or google-cloud-aiplatform if using PaLM/Vertex
-pdfplumber # or pypdf
-pandas
-chromadb   # or FAISS, Pinecone, etc.
-python-dotenv
